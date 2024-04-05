@@ -1,0 +1,408 @@
+a {
+    text-decoration: none !important;
+    color: inherit !important;
+}
+
+.Job-mother-box {
+    margin-top: 60px;
+
+}
+
+.Job-main-box {
+    display:flex ;
+    width: 100%;
+    margin-top: 40px;
+	
+}
+
+.Job-list-box {
+    width: 50%;
+    margin-right: 20px;
+    border: solid black;
+    border-width: thin;
+    border-radius: 39px;
+    padding: 15px;
+	
+}
+
+.Job-misc-box {
+    width: 50%;
+    height: max-content;
+    margin-left: 20px;
+    border: solid black;
+    border-width: thin;
+    border-radius: 39px;
+	
+}
+
+.Job-misc-title-box {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 15px;
+}
+
+.Job-misc-title-box h3 {
+    font-weight: 900;
+}
+
+.Job-misc-input-box {
+    display: block;
+    padding: 0px 15px 20px 15px;
+}
+
+.Job-misc-input-box div {
+    width: 100%;
+    display: flex;
+}
+
+.Job-misc-form-label {
+    width: 25%;
+}
+
+.Job-misc-form-input {
+    width: 75%;
+    border-radius: 39px;
+    border: solid black;
+    border-width: thin;
+    padding: 0px 10px;
+}
+
+.Job-misc-customize-form-input {
+    width: 75%;
+    border: solid rgb(197, 197, 197);
+    border-width: thin;
+    height: 30px;
+}
+
+.Job-misc-customize-form-input-two-wide {
+    width:102.5px;
+    border: solid rgb(197, 197, 197);
+    border-width: thin;
+    height: 30px;
+}
+
+.Job-list-item {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    margin-bottom: 20px;
+    border: solid black;
+    border-width: thin;
+    border-radius: 33px;
+    position: relative;
+	margin-right:-10px;
+}
+
+.Job-list-logo {
+    padding: 30px;
+}
+
+.Job-list-content {
+    padding: 30px 60px 30px 0px;
+}
+
+.Job-list-content p {
+    margin: 0px;
+}
+
+.Job-list-delete-btn {
+    position: absolute;
+    border-radius: 100%;
+    border: none;
+    padding: 0px 7px;
+    top: 25px;
+    right: 25px;
+    background: #000000;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.Job-form-management-delete-btn {
+    border-radius: 100%;
+    position: absolute;
+    border: none;
+    padding: 0px 7px;
+    height: 24px !important;
+    width: 24px !important;
+    background: #000000;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+#description {
+    height: 400px;
+    width: 100% ;
+    padding: 25px;
+    overflow: hidden;
+}
+
+.Job-misc-check-box {
+    display: flex;
+    justify-content: space-between;
+}
+
+.Job-misc-form-item {
+    width: 100%;
+    padding-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.Job-misc-btn {
+    background: #F3CD03;
+    border-radius: 6px;
+    border: none;
+    color: #ffffff;
+    width: 200px;
+    height: 50px;
+    transition: 0.3s;
+}
+
+.Job-add-form-field-btn {
+    border-radius: 6px;
+    border-radius: 15px;
+    width: 50% !important;
+    display: flex;
+    justify-content: center;
+    background-color: #F3CD03;
+    transition: 0.3s;
+    color: #ffffff;
+    margin: 0px auto;
+}
+
+.Job-add-form-field-btn:hover {
+    background-color: #a08800;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.Job-misc-btn:hover {
+    background: #a08800;
+    transition: 0.3s;
+}
+
+.Job-save-btn {
+    background: #2DC071;
+    border-radius: 6px;
+    border: none;
+    color: #ffffff;
+    width: 100px;
+    height: 40px;
+    transition: 0.3s;
+}
+
+.Job-save-btn:hover {
+    background: #1a7946;
+    transition: 0.3s;
+}
+.Job-share{
+    background: #fbb318;
+    border-radius: 6px;
+    border: none;
+    color: #ffffff;
+    width: 100px;
+    height: 40px;
+    transition: 0.3s; 
+}
+.Job-share:hover {
+    background: #a08800;
+    transition: 0.3s;
+}
+.Job-edit-btn {
+    background: #18A0FB;
+    border-radius: 6px;
+    border: none;
+    color: #ffffff;
+    width: 100px;
+    height: 40px;
+    transition: 0.3s;
+}
+
+.Job-edit-btn:hover {
+    background: #0467aa;
+    transition: 0.3s;
+}
+
+.Job-misc-check {
+    width: 24px !important;
+}
+
+.Job-list-item:hover {
+    background: #C3E7FC;
+}
+
+.Job-item-active {
+    background: #C3E7FC;
+}
+
+.Job-list-logo img {
+    width: 79px;
+    height: 74px;
+}
+
+.Job-misc-title-box button a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.Job-add-btn-box {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#Job-overview-box {
+    visibility: hidden;
+}
+
+.Job-search-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Job-search-box {
+    width: 50%;
+    margin-right: 20px;
+    border: solid black;
+    border-width: thin;
+    border-radius: 39px;
+    padding: 15px;
+    height: 130px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Job-search {
+    margin-left: 10px;
+    display: flex;
+    width: 300px;
+    border: solid #000000;
+    border-width: thin;
+    border-radius: 10px;
+}
+
+.Job-search input{
+    height: 40px;
+    width: 100%;
+    border-radius: 10px 0px 0px 10px;
+    border: none;
+    
+}
+
+.Job-search button {
+    border-radius: 0px 10px 10px 0px;
+    border: none;
+}
+
+.Job-filter-box {
+    width: 50%;
+    margin-left: 20px;
+    border: solid black;
+    border-width: thin;
+    border-radius: 39px;
+    padding: 15px;
+    padding: 20px 70px;
+    text-align: center;
+    height: 130px;
+}
+
+.Job-filter-list {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0px;
+}
+/* Share modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+  }
+  .share-icons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+  .share-icons a {
+    font-size: 30px;
+    color: #333;
+    text-decoration: none;
+    margin-right: 20px;
+  }
+  .Job-cancel-share{
+    background: #fb1818;
+    border-radius: 6px;
+    border: none;
+    color: #ffffff;
+    width: 100px;
+    height: 40px;
+    transition: 0.3s; 
+  }
+.Job-cancel-share:hover {
+    background: #a00000;
+    transition: 0.3s;
+}
+.cxx{
+    text-align: center;
+    padding-top: 3%;
+}
+
+.Job-list-easy-apply{
+        display: inline-block;
+        padding: 0.5em 1em;
+        margin: 0;
+        font-size: .9rem;
+
+        text-align: center;
+        color: #fff;
+        background-color: rgb(167, 185, 209);
+        border: none;
+        border-radius: 0.25rem;
+      }
+
+.Job-list-apply-on-web{
+    display: inline-block;
+    padding: 0.5em 1em;
+    margin: 0;
+    font-size: .9rem;
+
+    text-align: center;
+    color: #fff;
+    background-color: lightslategrey;
+    border: none;
+    border-radius: 0.25rem;
+}
+
+.Job-align-end {
+    text-align: end;
+    justify-content: space-between;
+}
+@media only screen and (max-width: 1000px) {
+	.Job-filter-box {
+    width: 50%;
+    margin-left: 5px;
+    border: solid black;
+    border-width: thin;
+    border-radius: 39px;
+    padding: 15px;
+    padding: 20px ;
+    text-align: center;
+    height: 130px;
+}
+	
+}

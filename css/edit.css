@@ -1,0 +1,57 @@
+/* Form General Style */
+.form-format {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%; /* Ensure form width is responsive */
+}
+
+/* Style adjustments for form inputs */
+input[type="text"],
+input[type="tel"],
+input[type="number"],
+input[type="url"],
+input[type="password"],
+input[type="email"],
+input[type="file"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-top: 8px; /* Adjusted for better spacing */
+  width: 90%; /* Adjust width for better responsiveness */
+  box-sizing: border-box; /* Ensure padding doesn't affect width */
+}
+
+/* Enhanced focus style for inputs */
+input[type="text"]:focus,
+input[type="tel"]:focus,
+input[type="number"]:focus,
+input[type="url"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+input[type="file"]:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Add a subtle glow */
+}
+
+/* Button Styles */
+.buttonMod, .confirm, .create, .cancel {
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  margin-top: 15px; /* Uniform margin for all buttons */
+  color: rgb(0, 0, 0);
+  background-color: #b1cbd4; /* Blue */
+  font-weight: bold;
+  transition: background-color 0.3s, transform 0.2s; /* Smooth background-color and transform transition */
+  width: auto; /* Adjust width to content */
+}
+
+
+.buttonMod:hover, .confirm:hover, .create:hover, .cancel:hover {
+  background-color: #005f73; /* Darker blue on hover */
+  transform: translateY(-2px); /* Slight lift effect */
+}
+

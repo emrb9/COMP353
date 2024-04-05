@@ -1,0 +1,371 @@
+@import url('https://fonts.googleapis.com/css?family=Work+Sans:300,600');
+
+/* navigation styles start here */
+h1{
+  font-family: Helvetica,sans-serif;
+  letter-spacing: 3px;
+    font-weight: 400;
+    font-size: 150%;
+    margin-top: -8px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    }
+
+    .banner{
+      width:100%;
+      top: 0px;
+      display: block;
+      background: #000;
+      color: white;
+      text-align: center;
+    }
+
+    .content {
+      padding-top: 130px;
+      height: 100%;
+      background-color: white;
+      display: grid;
+    }
+
+header {
+  top: 0;
+  background: white;
+  text-align:center;
+  position:absolute;
+  z-index: 999;
+  width: 100%;
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 400;
+  box-shadow: 0px 1px 5px #000000;
+}
+.nav-toggle {
+  position: absolute !important;
+  top: -9999px !important;
+  left: -9999px !important;
+}
+.nav-toggle-label {
+  position: absolute;
+  top: 0;
+  right:50px;
+  margin-left: 1em;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+.nav-toggle-label span,
+.nav-toggle-label span::before,
+.nav-toggle-label span::after {
+  display: block;
+  background: black;
+  height: 2px;
+  width: 2em;
+  border-radius: 2px;
+  position: relative;
+}
+.nav-toggle-label span::before,
+.nav-toggle-label span::after {
+  content: '';
+  position: absolute;
+}
+.nav-toggle-label span::before {
+  bottom: 7px;
+}
+.nav-toggle-label span::after {
+  top: 7px;
+}
+nav {
+  position: absolute;
+  text-align: middle;
+  top: 100%;
+  left: 0;
+
+  background: white;
+  width: 100%;
+  transform: scale(1, 0);
+  
+}
+nav ul {
+	   text-align: middle;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+nav li {
+	   text-align: middle;
+  margin-bottom: 1em;
+  margin-left: 1em;
+}
+nav a {
+	  
+  color: black;
+  text-decoration: none;
+  font-size: 1.2rem;
+
+}
+nav a:hover {
+	 text-align: right;
+  color: #333;
+  background: #ddd;
+}
+.nav-toggle:checked ~ nav {
+	
+  transform: scale(1,1);
+}
+.nav-toggle:checked ~ nav a {
+  opacity: 1;
+  transition: opacity 200ms ease-in-out 200ms;
+}
+.dropdown {
+	
+    z-index: 2;
+  display: none;
+    text-align: right;
+	
+}
+nav ul li:hover .dropdown {
+  display: flex;
+  position:fixed;
+  background: #f2f2f2;
+ 
+ 
+  text-align: right;
+
+}
+
+
+
+@media only screen and (max-width: 1259px) {
+	nav ul li:hover .dropdown {
+  display: flex;
+  position:fixed;
+ 
+ 
+  margin-left: 40%;
+  text-align: right;
+}
+
+nav {
+
+    box-shadow: 0px 5px 5px -4px #000000;
+}
+
+
+	
+}
+
+
+
+nav ul li:hover .dropdown ul {
+  display: block;
+  margin: 10px;
+  padding-right: 10px;
+}
+nav ul li:hover .dropdown ul li {
+  text-align: left;
+  width: 150px;
+  padding:10px;
+}
+
+/* Here begins the placement of font*/
+.item{
+  margin-top: 5px;
+  margin-bottom: -1px;
+}
+.description-item{
+  margin-top: 0px;
+  font-family: Helvetica, sans-serif;
+}
+.remove-connection{
+    margin-top: -15px;
+}
+.message{
+  margin-top: -15px;
+}
+
+
+.footer {
+  background:rgb(15, 14, 14);
+  color: white;
+  height: 102%;
+  position: relative;
+  margin-top: 5%;
+}
+.footer .footer-bottom {
+  width: 100%;
+  height: 50px;
+  text-align: center;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+}
+.footer .footer-content{
+  display: flex;
+}
+.footer .footer-content h2{
+  color: white;
+  font-family: "Times New Roman", serif;
+  font-weight: lighter;
+}
+.footer .footer-content .footer-section {
+  flex: 1; /* when we use this each section will be given and equal amount of space horizontally */
+  padding: 25px;
+}
+.footer .footer-content .about{
+  font-size: 1.2em;
+  text-align: left;
+  padding-bottom: 5%;
+  padding-left: 75px;
+}
+.footer .footer-content .links {
+  display: block;
+  padding: 30px;
+  margin-bottom: 10px;
+  padding-left: 75px;
+}
+.footer .footer-content .links a{
+  color: white;
+  font-size: 1.4em;
+  transition: all .3s;
+}
+.footer .footer-content .links a:hover{
+  margin-left: 15px;
+  transition: all .3s;
+}
+.footer .footer-content .contact-form{
+  margin-bottom: 10px;
+  font-size: 1.5em;
+  text-align: left;
+  padding-left: 75px;
+}
+.footer .footer-content .contact-form .contact-input{
+  line-height: 1.5em;
+  padding: .7rem 1.6rem;
+}
+.footer .footer-content .contact-form .contact-input:focus {
+  background: #ddd;
+}
+
+.btn-big{
+  padding: .9rem 1.3rem;
+}
+
+.fa:hover {
+    opacity: 1;
+    background: #ddd;
+}
+.fa-facebook {
+  background: white;
+  color: #111A1A;
+  padding: 8px;
+  width: 30px;
+  text-align: center;
+  text-decoration: none;
+  margin: 5px 2px;
+}
+.fa-instagram {
+  background: white;
+  color: #111A1A;
+  padding: 8px;
+  width: 30px;
+  text-align: center;
+  text-decoration: none;
+  margin: 5px 2px;
+}
+
+
+@media only screen and (max-width: 934px) {
+  .footer {
+    height: auto;
+  }
+
+  .footer .footer-content {
+    height: auto;
+    flex-direction: column;
+  }
+
+  .footer .footer-content .contact-form {
+    padding-bottom: 90px;
+  }
+
+  }
+
+@media screen and (max-width: 1260px) {
+  .logo {
+    width:100px;
+    height:100px;
+    margin-left: 20px;
+  }
+}
+
+
+@media screen and (min-width: 1260px) {
+
+	
+  .nav-toggle-label {
+    display: none;
+  }
+
+  header {
+    display: grid;
+    grid-template-columns: 1fr auto minmax(600px, 3fr) 1fr;
+  }
+
+  .logo {
+    grid-column: 2 / 3;
+    margin-left: 20px;
+  }
+
+  nav {
+    /* all: unset; /* this causes issues with Edge, since it's unsupported */
+
+    /* the following lines are not from my video, but add Edge support */
+    position: relative;
+    text-align: right;
+    transition: none;
+    transform: scale(1,1);
+    background: none;
+    top: initial;
+    left: initial;
+    /* end Edge support stuff */
+
+    grid-column: 3 / 4;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  nav ul {
+    display: flex;
+  }
+
+  nav li {
+    margin-left: 3em;
+    margin-bottom: 0;
+  }
+
+  nav a {
+    opacity: 1;
+    position: relative;
+  }
+
+  nav a::before {
+    content: '';
+    display: block;
+    height: 5px;
+    background: black;
+    position: absolute;
+    top: -.75em;
+    left: 0;
+    right: 0;
+    transform: scale(0, 1);
+    transition: transform ease-in-out 250ms;
+  }
+
+  nav a:hover::before {
+    transform: scale(1,1);
+  }
+}
+
+
+
+/* navigation styles ends here */

@@ -1,0 +1,90 @@
+.grid{
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+}
+.grid div{
+    height: 400px;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    position: relative;
+    }
+    
+    .grid div::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    background-color: rgba(255, 255, 255, 0.266);
+    transition: opacity 0.2s ease-in-out;
+    }
+    
+    .grid div:hover::before {
+    opacity: 1;
+    }
+    
+.grid a{
+    color: white;
+    text-decoration: none;
+    font-size: clamp(2rem,2vh,50px);
+}
+/* Management Page */
+.person{
+    background-image: url(../assets/Management/People.jpg);
+}
+.people{
+    background-image: url(../assets/Management/Employees.jpg);
+}
+.company{
+    background-image: url(../assets/Management/Company.jpg);
+}
+.connections{
+    background-image: url(../assets/Management/Residences.jpg);
+}
+.other{
+    background-image: url(../assets/Management/Suggestions.jpg); 
+}
+.others{
+    background-image: url(../assets/Management/Events.jpg); 
+}
+/* Records Page */
+.vaccine{
+    background-image: url(../assets/Management/Vaccine.jpg);
+}
+.infect{
+    background-image: url(../assets/Management/Infection.jpg);
+}
+.map{
+background-image: url(../assets/Management/Map.jpg);
+}
+/* Scheduling Page */
+.schedule{
+    background-image: url(../assets/Management/Schedule.jpg);
+}
+.reserve{
+    background-image: url(../assets/Management/Reserve.jpg);
+}
+.notif{
+background-image: url(../assets/Management/Notif.jpg);
+}
+.btn-big{
+    font-size: small;
+    }
+
+@media (min-width:840px){
+    .grid{
+        grid-template-columns: repeat(3,280px);
+        justify-content: center;
+    }
+}
+@media (min-width:900px){
+    .grid{
+        gap: 15px;
+    }
+}

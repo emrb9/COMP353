@@ -1,0 +1,164 @@
+.employee-list-container {
+  margin: 20px 0;
+}
+
+.employee-list-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.employee-list-table th, .employee-list-table td {
+  text-align: left;
+  /*padding here is causing responsive issue*/
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+}
+
+.employee-list-table th {
+  background-color: #f2f2f2;
+}
+.search-filter-sort, .employeeFormCenter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.employeeFormCenter form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.search-filter-sort {
+  margin-bottom: 10px;
+}
+
+input[type="text"], select, button {
+  padding: 5px;
+  margin: 5px 5px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+label{
+  margin: 5px 10px;
+}
+
+button a{
+  color: black; 
+  text-decoration: none; 
+}
+
+
+.buttonMod {
+  background-color: #b1cbd4; /* Blue */
+  color: rgb(0, 0, 0);
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.buttonMod:hover {
+  background-color: #005f73; /* Darker blue on hover */
+}
+
+.form-row {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 48%; 
+  margin-bottom: 10px;
+}
+
+h4{
+  font-size: 170%;
+  font-weight: lighter;
+  font-family: Helvetica,sans-serif;
+  letter-spacing: 1px;
+  text-align: center;
+}
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(1, 20vw);
+    grid-gap: 100px 15px;
+    padding-top: 15px;
+    padding-bottom: 100px;
+    padding-left: 10px;
+    padding-right: 10px;
+	
+}
+.grid-container .box a{
+  color:black;
+  text-decoration: none;
+  
+}
+.grid-container .box a img{
+width: 280px;
+height: 280px;
+object-fit: cover;
+
+}
+.box {
+  text-align: center;
+height: 280px;
+
+}
+button{
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+}
+.btn-big{
+font-size: small;
+font-weight:400;
+
+}
+
+.addPlacement{
+text-align: left;
+padding-left: 10px;
+}
+.add-button {
+  background-color: rgb(2, 22, 8);
+  border: 2px solid black;
+  width: 100px;
+}
+.add-button a {
+  text-decoration: none;
+  color: white;
+  display: inline-block;
+  padding: 8px 16px;
+}
+
+@media (max-width: 600px) {
+  .form-row {
+      flex-direction: column;
+  }
+  .form-group {
+      flex-basis: 100%;
+  }
+}
+
+@media only screen and (max-width: 1360px) {
+  .grid-container {
+    height: auto;
+    display:flex;
+    flex-direction: column;
+  }
+  .box {
+    text-align: center;
+    
+    width: 100%;
+    height: 300px;
+  }
+
+  }
