@@ -11,8 +11,7 @@
     <div class="employeeFormCenter">
         <button class="buttonMod" onclick="openForm()">Add Employee</button>
         <div id="employeeForm" style="display:none;">
-            <form action="/Employee/save" id="employeeFormEl" method="post"> <!-- Removed action attribute to handle submission with fetch API -->
-                <!-- Removed the hidden SSN input, as the SSN field is now always required and not hidden -->
+            <form action="/Employee/save" id="employeeFormEl" method="post">
                 <div class="form-row">
                     <div class="form-group">
                         <label for="SSN">SSN:</label>
@@ -42,19 +41,40 @@
                         <th>First Name</th>
                         <th>Last Name</th>
                         <th>Role</th>
-                        <!-- Simplified the columns to match the employee's core information -->
-                        <th>Manage</th>
+                        <th>Vaccination Type</th>
+                        <th>Dose Number</th>
+                        <th>Vaccination Date</th>
+                        <th> Manage </th>
+                        <!-- Add other columns as needed -->
                     </tr>
                 </thead>
                 <tbody>
                     <?php foreach ($data as $datum) { ?>
-                        <tr id="employee-<?= htmlspecialchars($datum->SSN) ?>">
-                            <td><?= htmlspecialchars($datum->SSN) ?></td>
-                            <td><?= htmlspecialchars($datum->firstName) ?></td>
-                            <td><?= htmlspecialchars($datum->lastName) ?></td>
-                            <td><?= htmlspecialchars($datum->role) ?></td>
+                        <tr>
                             <td>
-                                <button class="buttonMod" onclick="openForm('<?= $datum->SSN ?>', '<?= htmlspecialchars($datum->role) ?>', '<?= htmlspecialchars($datum->medicareNumber) ?>')">Edit</button>
+                                <?= htmlspecialchars($datum->SSN) ?>
+                            </td>
+                            <td>
+                                <?= htmlspecialchars($datum->firstName) ?>
+                            </td>
+                            <td>
+                                <?= htmlspecialchars($datum->lastName) ?>
+                            </td>
+                            <td>
+                                <?= htmlspecialchars($datum->role) ?>
+                            </td>
+                            <td>
+                                <?= htmlspecialchars($datum->vaccinationType) ?>
+                            </td>
+                            <td>
+                                <?= htmlspecialchars($datum->doseNumber) ?>
+                            </td>
+                            <td>
+                                <?= htmlspecialchars($datum->vaccinationDate) ?>
+                            </td>
+                            <td>
+                                <button class="buttonMod"
+                                    onclick="openForm('<?= $datum->SSN ?>', '<?= htmlspecialchars($datum->role) ?>', '<?= htmlspecialchars($datum->medicareNumber) ?>')">Edit</button>
                                 <button class="buttonMod" onclick="confirmDelete('<?= $datum->SSN ?>')">Delete</button>
                             </td>
                         </tr>
@@ -105,7 +125,7 @@
         document.getElementById('role').value = role;
         document.getElementById('medicareNumber').value = medicareNumber;
     }
-    
+
 
     document.addEventListener('DOMContentLoaded', function () {
         const form = document.getElementById('employeeForm').querySelector('form');
@@ -142,36 +162,36 @@
     }
 
     function confirmDelete(SSN) {
-    if (confirm('Are you sure you want to delete this employee?')) {
-        fetch(`/Employee/delete/${SSN}`, {
-            method: 'POST', // Assuming you've adjusted server-side to handle POST
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ SSN: SSN })
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    alert('Employee deleted successfully');
-
-                    // Remove the employee's row from the table
-                    var row = document.getElementById('employee-' + SSN);
-                    if (row) {
-                        row.parentNode.removeChild(row);
-                    }
-
-                    // Optionally, you can refresh the list or take other actions here
-                } else {
-                    // Handle errors or unsuccessful deletion
-                    alert('Failed to delete the employee. ' + (data.error || 'Unknown error occurred.'));
-                }
+        if (confirm('Are you sure you want to delete this employee?')) {
+            fetch(`/Employee/delete/${SSN}`, {
+                method: 'POST', // Assuming you've adjusted server-side to handle POST
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ SSN: SSN })
             })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Error deleting the employee.');
-            });
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Employee deleted successfully');
+
+                        // Remove the employee's row from the table
+                        var row = document.getElementById('employee-' + SSN);
+                        if (row) {
+                            row.parentNode.removeChild(row);
+                        }
+
+                        // Optionally, you can refresh the list or take other actions here
+                    } else {
+                        // Handle errors or unsuccessful deletion
+                        alert('Failed to delete the employee. ' + (data.error || 'Unknown error occurred.'));
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error deleting the employee.');
+                });
+        }
     }
-}
 </script>
 <?php include 'app/views/Common/footer.php'; ?>

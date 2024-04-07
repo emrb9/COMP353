@@ -26,7 +26,6 @@ class EmployeeController extends Controller
             $this->view('Home/Index');
         }
     }
-    /* TO DO: INTEGRATE save() */
     public function save()
     {
         if (!isset($_SESSION['user_id'])) {
@@ -59,7 +58,7 @@ class EmployeeController extends Controller
                 }
                 exit;
             } catch (Exception $e) {
-                http_response_code(500); // Set appropriate HTTP status code
+                http_response_code(500); 
                 echo json_encode(['success' => false, 'error' => $e->getMessage()]);
                 exit;
             }
