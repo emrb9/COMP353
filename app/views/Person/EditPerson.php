@@ -11,7 +11,7 @@
         $person = $data['person']; // Adjust this line based on how data is actually passed to your view
         ?>
 
-        <form action="/Person/EditAction/<?= $person->id ?>" method="post" class="form-format">
+        <form action="/Person/EditAction" method="post" class="form-format">
             <input type="hidden" name="action" value="editperson">
 
             <input type="text" name="SSN" value="<?= htmlspecialchars($person->SSN) ?>" required>

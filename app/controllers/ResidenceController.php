@@ -69,8 +69,6 @@ class residenceController extends Controller
             $residenceModel = $this->model('Residence');
     
             // Retrieve all the form data
-            $originalAddress = filter_var($_POST['originalAddress'], FILTER_SANITIZE_STRING);
-            $originalPostalCode = filter_var($_POST['originalPostalCode'], FILTER_SANITIZE_STRING);
             $address = filter_var($_POST['address'], FILTER_SANITIZE_STRING);
             $postalCode = filter_var($_POST['postalCode'], FILTER_SANITIZE_STRING);
             $city = filter_var($_POST['city'], FILTER_SANITIZE_STRING);
@@ -81,7 +79,7 @@ class residenceController extends Controller
 
     
             // Attempt to update the residence
-            if ($residenceModel->updateresidence($originalAddress, $originalPostalCode, $address, $postalCode, $city, $province, $type, $phoneNumber, $bedroomNumber)) {
+            if ($residenceModel->updateresidence($address, $postalCode, $city, $province, $type, $phoneNumber, $bedroomNumber)) {
                 header("Location: /Residence?message=Update+Successful");
             } else {
                 header("Location: /Residence?error=Update+Failed");

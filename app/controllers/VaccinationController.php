@@ -2,105 +2,115 @@
 
 class vaccinationController extends Controller
 {
-
-    /**
-     * Main landing page for the Vaccination section of the system.
-     *
-     * Retrieves all the companies and loads them into the Index view.
-     */
     public function index()
     {
         $vaccination = $this->model('Vaccination'); // get a reference to the Vaccination object model
-        $companies = $vaccination->getAllCompanies(); // call the method to retrieve all the companies from the DB
-        $this->view('Vaccination/Index', $companies); // load the vaccination index view with the passed data
+        $vaccinations = $vaccination->getAllVaccinations(); // call the method to retrieve all the companies from the DB
+        $this->view('Vaccination/Index', $vaccinations);
     }
 
-    /**
-     * Allows users to add companies to the system through the Addvaccination form view.
-     *
-     * Manages the form actions.
-     */
     public function add()
-    {
-        if (isset($_POST['action'])) { // if the form was posted
-            $vaccination = $this->model('Vaccination'); // get a reference to the Vaccination object model
-            // set the appropriate fields
-            $vaccination->SSN = $_POST['SSN'];
-            $vaccination->doseNumber = $_POST['doseNumber'];
-            $vaccination->type = $_POST['type'];
-            $vaccination->date = $_POST['date'];
-            $vaccination->address = $_POST['address'];
-            $vaccination->postalCode = $_POST['postalCode'];
-            $vaccination->creator_uid = $_SESSION['user_id'];
-
-            $vaccination->addvaccination(); // call the method to create the vaccination record in the DB
-            header("Location: /Vaccination"); // redirect the user to the Vaccination Index page
-        }
-        $this->view('Vaccination/Addvaccination'); // load the Addvaccination form view
-    }
-    public function edit($id) {
-        $vaccinationModel = $this->model('Vaccination'); // Assuming this method correctly instantiates your model
-        $vaccination = $vaccinationModel->getvaccinationById($id); // Fetch the vaccination by ID
-        
-        if ($vaccination) {
-            $this->view('Vaccination/Editvaccination', ['vaccination' => $vaccination]); // Pass the vaccination data to the view
-        } else {
-            // Handle the case where no vaccination was found for the given ID
-            header('Location: /Vaccination');
-            exit();
-        }
-    }    
-
-    public function editAction($id)
     {
         if (isset($_POST['action'])) {
             $vaccination = $this->model('Vaccination');
-            // Assign updated values from form to the vaccination object
-            $vaccination->id = $id;
-            $vaccination->SSN = $_POST['SSN'];
-            $vaccination->doseNumber = $_POST['doseNumber'];
-            $vaccination->type = $_POST['type'];
-            $vaccination->date = $_POST['date'];
-            $vaccination->address = $_POST['address'];
-            $vaccination->postalCode = $_POST['postalCode'];
-            // Repeat for other fields
-            $vaccination->updatevaccination(); // Update the vaccination
-            header("Location: /Vaccination"); // Redirect to the vaccination list page
+
+            // Basic input validation example
+            if (!empty($_POST['SSN']) && !empty($_POST['doseNumber']) && !empty($_POST['type'])) {
+                // Sanitizing inputs as an extra layer of security
+                $vaccination->SSN = filter_var($_POST['SSN'], FILTER_SANITIZE_STRING);
+                $vaccination->doseNumber = filter_var($_POST['doseNumber'], FILTER_SANITIZE_STRING);
+                $vaccination->type = filter_var($_POST['type'], FILTER_SANITIZE_STRING);
+                $vaccination->date = filter_var($_POST['date'], FILTER_SANITIZE_STRING);
+                $vaccination->address = filter_var($_POST['address'], FILTER_SANITIZE_STRING);
+                $vaccination->postalCode = filter_var($_POST['postalCode'], FILTER_SANITIZE_STRING);
+
+                if($vaccination->addvaccination()) {
+                    header("Location: /Vaccination?message=Addition+Successful");
+                } else {
+                    header("Location: /Vaccination/Addvaccination?error=Addition+Failed");
+                }
+            } else {
+                header("Location: /Vaccination/Addvaccination?error=Validation+Failed");
+            }
+            exit();
+        }
+        $this->view('Vaccination/Addvaccination');
+    }
+
+    public function edit() {
+        // Check if the form was submitted via POST with the required data
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['SSN']) && isset($_POST['doseNumber']) && isset($_POST['type'])) {
+            // Sanitize the input for security
+            $SSN = filter_var($_POST['SSN'], FILTER_SANITIZE_STRING);
+            $doseNumber = filter_var($_POST['doseNumber'], FILTER_SANITIZE_STRING);
+            $type = filter_var($_POST['type'], FILTER_SANITIZE_STRING);
+            // Fetch the vaccination's details using the provided address and postalCode
+            $vaccinationModel = $this->model('Vaccination');
+            $vaccination = $vaccinationModel->getvaccinationById($SSN, $doseNumber, $type);
+    
+            if ($vaccination) {
+                // If the vaccination is found, pass its details to the view to pre-fill the edit form
+                $this->view('Vaccination/Editvaccination', ['vaccination' => $vaccination]);
+            } else {
+                // Redirect with an error if the vaccination cannot be found
+                header('Location: /Vaccination?error=Vaccination+Not+Found');
+                exit();
+            }
+        } else {
+            // Redirect or handle the case where the necessary POST data wasn't provided
+            header('Location: /Vaccination?error=Missing+Data');
+            exit();
+        }
+    }   
+
+    public function editAction() {
+        if (isset($_POST['action'])) {
+            $vaccinationModel = $this->model('Vaccination');
+    
+            // Retrieve all the form data
+            $SSN = filter_var($_POST['SSN'], FILTER_SANITIZE_STRING);
+            $doseNumber = filter_var($_POST['doseNumber'], FILTER_SANITIZE_STRING);
+            $type = filter_var($_POST['type'], FILTER_SANITIZE_STRING);
+            $date = filter_var($_POST['date'], FILTER_SANITIZE_STRING);
+            $type = filter_var($_POST['type'], FILTER_SANITIZE_STRING);
+            $address = filter_var($_POST['address'], FILTER_SANITIZE_STRING);
+            $postalCode = filter_var($_POST['postalCode'], FILTER_SANITIZE_STRING);
+
+    
+            // Attempt to update the vaccination
+            if ($vaccinationModel->updatevaccination($SSN, $doseNumber, $type, $date, $address, $postalCode)) {
+                header("Location: /Vaccination?message=Update+Successful");
+            } else {
+                header("Location: /Vaccination?error=Update+Failed");
+            }
+            exit();
         }
     }
-
-    /**
-     * Enables the functionality to delete a vaccination from the system based on the passed ID.
-     *
-     * @param $gid int The ID of the vaccination to delete.
-     */
-    public function delete($cid)
-    {
-        $vaccination = $this->model('Vaccination'); // get a reference to the Vaccination object model
-        $vaccination->id = $cid; // set the gid field
-        $vaccination->creator_uid = $_SESSION['user_id']; // set the creator field
-        $vaccination->deletevaccination(); // call the method to delete the vaccination record from the DB
-        $this->index(); // load the index view
-    }
     
-    /**
-     * Checks whether or not the current user is the creator of the vaccination with the given ID
-     *
-     * @param $gid int The ID of the vaccination to verify creator status.
-     *
-     * @return bool True if the current user created the vaccination, false otherwise.
-     */
-    public function amCreator($cid)
-    {
-        $vaccination = $this->model('Vaccination'); // get a reference to the Vaccination object model
-        $vaccination->id = $cid; // set the vaccination ID field
-        $vaccination->creator_uid = $_SESSION['user_id']; // set the creator field
-        /* call the method to check if the DB record states that the current user is the creator.
-         The output of the method call is passed to a boolean expression method to confirm that at least one record
-         was returned. */
-        return is_array($vaccination->isCreator());
-    }
 
+public function delete()
+{
+    if (isset($_POST['SSN']) && isset($_POST['doseNumber'])&& isset($_POST['type'])) {
+        $SSN = filter_var($_POST['SSN'], FILTER_SANITIZE_STRING);
+        $doseNumber = filter_var($_POST['doseNumber'], FILTER_SANITIZE_STRING);
+        $type = filter_var($_POST['type'], FILTER_SANITIZE_STRING);
+
+        $vaccination = $this->model('Vaccination');
+        $vaccination->SSN = $SSN;
+        $vaccination->doseNumber = $doseNumber;
+        $vaccination->type = $type;
+
+        if ($vaccination->deletevaccination()) {
+            header("Location: /Vaccination?message=Deletion+Successful");
+        } else {
+            header("Location: /Vaccination?error=Deletion+Failed");
+        }
+    } else {
+        // Redirect or handle the error if address or postalCode aren't provided
+        header("Location: /Vaccination?error=Missing+Data");
+    }
+    exit();
+}
 }
 
 ?>

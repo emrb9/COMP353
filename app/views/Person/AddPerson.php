@@ -48,13 +48,13 @@
         <div class="form-group">
           <label for="emailAddress">Email Address:</label>
           <br>
-          <input type="text" name="emailAddress" class="form-bedroomNumber" id="emailAddress" placeholder="Email Address" required/>
+          <input type="text" name="emailAddress" class="form-control" id="emailAddress" placeholder="Email Address" required/>
         </div>
         <br>
         <div class="form-group">
           <label for="occupation">Occupation:</label>
           <br>
-          <input type="text" name="occupation" class="form-bedroomNumber" id="occupation" placeholder="Occupation" required/>
+          <input type="text" name="occupation" class="form-control" id="occupation" placeholder="Occupation" required/>
         </div>
 
         <button type="submit" name="action" class="create">Add Person</button>

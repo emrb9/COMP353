@@ -38,10 +38,14 @@
                             <td><?= htmlspecialchars($person->emailAddress) ?></td>
                             <td><?= htmlspecialchars($person->occupation) ?></td>
                             <td>
-                            <?php if ($this->amCreator($person->id)) { ?>
-                                <button type="button" class="buttonMod"><a href="/Person/Edit/<?= $person->id ?>">Edit</a></button>
-                                <button type="button" class="buttonMod"><a href="/Person/Delete/<?= $person->id ?>">Delete</a></button>
-                            <?php } ?>
+                            <form action="/Person/Edit" method="post" style="display: inline;">
+                                    <input type="hidden" name="SSN" value="<?= htmlspecialchars($person->SSN) ?>">
+                                    <button type="submit" class="buttonMod">Edit</button>
+                                </form>
+                                <form action="/Person/Delete" method="post" style="display: inline;" onsubmit="return confirm('Are you sure you want to delete this person?');">
+                                    <input type="hidden" name="SSN" value="<?= htmlspecialchars($person->SSN) ?>">
+                                    <button type="submit" class="buttonMod">Delete</button>
+                                </form>
                         </td>
                     </tr>
             <?php   }

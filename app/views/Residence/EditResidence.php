@@ -11,7 +11,7 @@
         $residence = $data['residence']; // Adjust this line based on how data is actually passed to your view
         ?>
 
-        <<form action="/Facility/EditAction" method="post" class="form-format">
+        <form action="/Residence/EditAction" method="post" class="form-format">
             <input type="hidden" name="action" value="editresidence">
             <input type="text" name="address" value="<?= htmlspecialchars($residence->address) ?>" required>
             <input type="text" name="postalCode" value="<?= htmlspecialchars($residence->postalCode) ?>" required>

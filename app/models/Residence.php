@@ -50,8 +50,6 @@ class Residence extends Model
 
     public function getresidenceById($address, $postalCode)
     {
-
-
         try {
             $stmt = $this->_connection->prepare("SELECT * FROM Residences WHERE address = :address AND postalCode = :postalCode");
             $stmt->execute(['address' => $address, 'postalCode' => $postalCode]);
@@ -62,30 +60,28 @@ class Residence extends Model
         }
     }
 
-    public function updateresidence($originalAddress, $originalPostalCode, $address, $postalCode, $city, $province, $type, $phoneNumber, $bedroomNumber) {
+    public function updateresidence($address, $postalCode, $city, $province, $type, $phoneNumber, $bedroomNumber) {
         try {
             $stmt = $this->_connection->prepare(
                 "UPDATE Residences SET 
-                    address = :newAddress, 
-                    postalCode = :newPostalCode, 
+                    address = :address, 
+                    postalCode = :postalCode, 
                     city = :city, 
                     province = :province, 
                     type = :type, 
                     phoneNumber = :phoneNumber, 
                     bedroomNumber = :bedroomNumber 
-                WHERE address = :originalAddress AND postalCode = :originalPostalCode"
+                WHERE address = :address AND postalCode = :postalCode"
             );
     
             $stmt->execute([
-                'newAddress' => $address,
-                'newPostalCode' => $postalCode,
+                'address' => $address,
+                'postalCode' => $postalCode,
                 'city' => $city,
                 'province' => $province,
                 'type' => $type,
                 'phoneNumber' => $phoneNumber,
                 'bedroomNumber' => $bedroomNumber,
-                'originalAddress' => $originalAddress,
-                'originalPostalCode' => $originalPostalCode,
             ]);
     
             return $stmt->rowCount();
@@ -101,6 +97,16 @@ class Residence extends Model
         $this->_connection->beginTransaction();
         
         try {
+            $stmtPrimaryResidences = $this->_connection->prepare(
+                "DELETE FROM PrimaryResidences WHERE address = :address AND postalCode = :postalCode"
+            );
+            $stmtPrimaryResidences->execute(['address' => $this->address, 'postalCode' => $this->postalCode]);
+
+            $stmtSecondaryResidences = $this->_connection->prepare(
+                "DELETE FROM SecondaryResidences WHERE address = :address AND postalCode = :postalCode"
+            );
+            $stmtSecondaryResidences->execute(['address' => $this->address, 'postalCode' => $this->postalCode]);
+
             $stmtResidences = $this->_connection->prepare(
                 "DELETE FROM Residences WHERE address = :address AND postalCode = :postalCode"
             );
