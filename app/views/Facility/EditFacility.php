@@ -11,8 +11,11 @@
         $facility = $data['facility']; // Adjust this line based on how data is actually passed to your view
         ?>
 
-        <form action="/Facility/EditAction/<?= $facility->id ?>" method="post" class="form-format">
+        <form action="/Facility/EditAction" method="post" class="form-format">
             <input type="hidden" name="action" value="editfacility">
+            <!-- These hidden inputs hold the address and postalCode for identification without exposing them in the URL -->
+            <input type="hidden" name="originalAddress" value="<?= htmlspecialchars($facility->address) ?>">
+            <input type="hidden" name="originalPostalCode" value="<?= htmlspecialchars($facility->postalCode) ?>">
             <input type="text" name="name" value="<?= htmlspecialchars($facility->name) ?>" required>
             <input type="text" name="address" value="<?= htmlspecialchars($facility->address) ?>" required>
             <input type="text" name="postalCode" value="<?= htmlspecialchars($facility->postalCode) ?>" required>
@@ -23,9 +26,9 @@
             <input type="text" name="capacity" value="<?= htmlspecialchars($facility->capacity) ?>" required>
             <input type="text" name="webAddress" value="<?= htmlspecialchars($facility->webAddress) ?>" required>
             <input type="text" name="managerSSN" value="<?= htmlspecialchars($facility->managerSSN) ?>" required>
-            <br></br>
+            <br><br>
             <input class="buttonMod" type="submit" value="Save Changes">
-            <button class="buttonMod" onclick="window.location.href='/Facility'">Cancel</button>
+            <button type="button" class="buttonMod" onclick="window.location.href='/Facility'">Cancel</button>
         </form>
     </div>
 </div>
