@@ -8,7 +8,7 @@
     <div class="addPlacement">
         <button class="buttonMod"><a href="/Vaccination/Add">Add Vaccination</a></button>
     </div>
-    
+
     <!-- Modified Table Format for Facilities using Employee Table Styles -->
     <div class="employee-list-container">
         <table class="employee-list-table">
@@ -27,24 +27,45 @@
                 <?php if (is_array($data)) {
                     foreach ($data as $vaccination) { ?>
                         <tr>
-                            <td><?= htmlspecialchars($vaccination->SSN) ?></td>
-                            <td><?= htmlspecialchars($vaccination->doseNumber) ?></td>
-                            <td><?= htmlspecialchars($vaccination->type) ?></td>
-                            <td><?= htmlspecialchars($vaccination->date) ?></td>
-                            <td><?= htmlspecialchars($vaccination->address) ?></td>
-                            <td><?= htmlspecialchars($vaccination->postalCode) ?></td>
                             <td>
-                            <?php if ($this->amCreator($vaccination->id)) { ?>
-                                <button type="button" class="buttonMod"><a href="/Vaccination/Edit/<?= $vaccination->id ?>">Edit</a></button>
-                                <button type="button" class="buttonMod"><a href="/Vaccination/Delete/<?= $vaccination->id ?>">Delete</a></button>
-                            <?php } ?>
-                        </td>
-                    </tr>
-            <?php   }
-            } ?>
-        </tbody>
-    </table>
-</div>
+                                <?= htmlspecialchars($vaccination->SSN) ?>
+                            </td>
+                            <td>
+                                <?= htmlspecialchars($vaccination->doseNumber) ?>
+                            </td>
+                            <td>
+                                <?= htmlspecialchars($vaccination->type) ?>
+                            </td>
+                            <td>
+                                <?= htmlspecialchars($vaccination->date) ?>
+                            </td>
+                            <td>
+                                <?= htmlspecialchars($vaccination->address) ?>
+                            </td>
+                            <td>
+                                <?= htmlspecialchars($vaccination->postalCode) ?>
+                            </td>
+                            <td>
+                                <form action="/Vaccination/Edit" method="post" style="display: inline;">
+                                    <input type="hidden" name="SSN" value="<?= htmlspecialchars($vaccination->SSN) ?>">
+                                    <input type="hidden" name="doseNumber" value="<?= htmlspecialchars($vaccination->doseNumber) ?>">
+                                    <input type="hidden" name="type" value="<?= htmlspecialchars($vaccination->type) ?>">
+                                    <button type="submit" class="buttonMod">Edit</button>
+                                </form>
+                                <form action="/Vaccination/Delete" method="post" style="display: inline;"
+                                    onsubmit="return confirm('Are you sure you want to delete this vaccination?');">
+                                    <input type="hidden" name="SSN" value="<?= htmlspecialchars($vaccination->SSN) ?>">
+                                    <input type="hidden" name="doseNumber" value="<?= htmlspecialchars($vaccination->doseNumber) ?>">
+                                    <input type="hidden" name="type" value="<?= htmlspecialchars($vaccination->type) ?>">
+                                    <button type="submit" class="buttonMod">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <?php }
+                } ?>
+            </tbody>
+        </table>
+    </div>
 </div>
 <!-- CONTENT END-->
 

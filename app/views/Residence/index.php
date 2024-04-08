@@ -36,10 +36,16 @@
                             <td><?= htmlspecialchars($residence->phoneNumber) ?></td>
                             <td><?= htmlspecialchars($residence->bedroomNumber) ?></td>
                             <td>
-                            <?php if ($this->amCreator($residence->id)) { ?>
-                                <button type="button" class="buttonMod"><a href="/Residence/Edit/<?= $residence->id ?>">Edit</a></button>
-                                <button type="button" class="buttonMod"><a href="/Residence/Delete/<?= $residence->id ?>">Delete</a></button>
-                            <?php } ?>
+                            <form action="/Residence/Edit" method="post" style="display: inline;">
+                                    <input type="hidden" name="address" value="<?= htmlspecialchars($residence->address) ?>">
+                                    <input type="hidden" name="postalCode" value="<?= htmlspecialchars($residence->postalCode) ?>">
+                                    <button type="submit" class="buttonMod">Edit</button>
+                                </form>
+                                <form action="/Residence/Delete" method="post" style="display: inline;" onsubmit="return confirm('Are you sure you want to delete this residence?');">
+                                    <input type="hidden" name="address" value="<?= htmlspecialchars($residence->address) ?>">
+                                    <input type="hidden" name="postalCode" value="<?= htmlspecialchars($residence->postalCode) ?>">
+                                    <button type="submit" class="buttonMod">Delete</button>
+                                </form>
                         </td>
                     </tr>
             <?php   }

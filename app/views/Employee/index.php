@@ -11,44 +11,21 @@
     <div class="employeeFormCenter">
         <button class="buttonMod" onclick="openForm()">Add Employee</button>
         <div id="employeeForm" style="display:none;">
-            <form action="/Employee/save" method="post">
-                <input type="hidden" name="SSN" id="employeeSSN">
-
+            <form action="/Employee/save" id="employeeFormEl" method="post">
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="firstName">First Name:</label>
-                        <input type="text" id="firstName" name="firstName" required>
+                        <label for="SSN">SSN:</label>
+                        <input type="text" id="SSN" name="SSN" required>
                     </div>
                     <div class="form-group">
-                        <label for="lastName">Last Name:</label>
-                        <input type="text" id="lastName" name="lastName" required>
+                        <label for="medicareNumber">Medicare:</label>
+                        <input type="text" id="medicareNumber" name="medicareNumber" required>
                     </div>
-                </div>
-
-                <!-- Repeat for other fields -->
-                <div class="form-row">
                     <div class="form-group">
                         <label for="role">Role:</label>
                         <input type="text" id="role" name="role" required>
                     </div>
-                    <div class="form-group">
-                        <label for="vaccinationType">Vaccination Type:</label>
-                        <input type="text" id="vaccinationType" name="vaccinationType">
-                    </div>
                 </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="doseNumber">Dose Number:</label>
-                        <input type="text" id="doseNumber" name="doseNumber">
-                    </div>
-                    <div class="form-group">
-                        <label for="vaccinationDate">Vaccination Date:</label>
-                        <input type="text" id="vaccinationDate" name="vaccinationDate">
-                    </div>
-                </div>
-
-                <br></br>
-
                 <button class="buttonMod" type="submit">Save Employee</button>
                 <button class="buttonMod" type="button" onclick="closeForm()">Cancel</button>
             </form>
@@ -97,7 +74,7 @@
                             </td>
                             <td>
                                 <button class="buttonMod"
-                                    onclick="openForm('<?= $datum->SSN ?>', '<?= htmlspecialchars($datum->firstName) ?>', '<?= htmlspecialchars($datum->lastName) ?>', '<?= htmlspecialchars($datum->role) ?>', '<?= htmlspecialchars($datum->vaccinationType) ?>', '<?= htmlspecialchars($datum->doseNumber) ?>', '<?= htmlspecialchars($datum->vaccinationDate) ?>')">Edit</button>
+                                    onclick="openForm('<?= $datum->SSN ?>', '<?= htmlspecialchars($datum->role) ?>', '<?= htmlspecialchars($datum->medicareNumber) ?>')">Edit</button>
                                 <button class="buttonMod" onclick="confirmDelete('<?= $datum->SSN ?>')">Delete</button>
                             </td>
                         </tr>
@@ -109,6 +86,7 @@
         <?php } ?>
     </div>
 </div>
+
 <script>
     function searchFunction() {
         let input, filter, table, tr, td, i, j, txtValue, found;
@@ -140,17 +118,14 @@
         }
     }
 
-    function openForm(SSN = '', firstName = '', lastName = '', role = '', vaccinationType = '', doseNumber = '', vaccinationDate = '') {
+    function openForm(SSN = '', role = '', medicareNumber = '') {
         document.getElementById('employeeForm').style.display = 'block';
         // Populate the form if details are provided (for editing)
-        document.getElementById('employeeSSN').value = SSN;
-        document.getElementById('firstName').value = firstName;
-        document.getElementById('lastName').value = lastName;
+        document.getElementById('SSN').value = SSN;
         document.getElementById('role').value = role;
-        document.getElementById('vaccinationType').value = vaccinationType;
-        document.getElementById('doseNumber').value = doseNumber;
-        document.getElementById('vaccinationDate').value = vaccinationDate;
+        document.getElementById('medicareNumber').value = medicareNumber;
     }
+
 
     document.addEventListener('DOMContentLoaded', function () {
         const form = document.getElementById('employeeForm').querySelector('form');
@@ -198,26 +173,25 @@
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
-                        // Assuming data.success is true when deletion is successful
                         alert('Employee deleted successfully');
 
-                        // Example of removing the employee's row from the table
-                        // This requires that each row in your table has an id attribute set to something like "employee-{SSN}"
+                        // Remove the employee's row from the table
                         var row = document.getElementById('employee-' + SSN);
                         if (row) {
                             row.parentNode.removeChild(row);
                         }
 
-                        // Optionally, refresh the list or redirect if necessary
-                        // location.reload(); // Be cautious with reloading; it might not offer the best user experience.
+                        // Optionally, you can refresh the list or take other actions here
                     } else {
-                        // Handle errors
+                        // Handle errors or unsuccessful deletion
                         alert('Failed to delete the employee. ' + (data.error || 'Unknown error occurred.'));
                     }
                 })
-                .catch(error => console.error('Error:', error));
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error deleting the employee.');
+                });
         }
-
     }
 </script>
 <?php include 'app/views/Common/footer.php'; ?>

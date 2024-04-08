@@ -8,7 +8,7 @@
     <div class="addPlacement">
         <button class="buttonMod"><a href="/Facility/Add">Add Facility</a></button>
     </div>
-    
+
     <!-- Modified Table Format for Facilities using Employee Table Styles -->
     <div class="employee-list-container">
         <table class="employee-list-table">
@@ -31,8 +31,12 @@
                 </tr>
             </thead>
             <tbody>
-                <?php if (is_array($data)) {
-                    foreach ($data as $facility) { ?>
+                <?php if (empty($data)): ?>
+                    <tr>
+                        <td colspan="14" style="text-align: center;">No facilities found.</td>
+                    </tr>
+                <?php else: ?>
+                    <?php foreach ($data as $facility): ?>
                         <tr>
                             <td><?= htmlspecialchars($facility->facilityName) ?></td>
                             <td><?= htmlspecialchars($facility->address) ?></td>
@@ -40,7 +44,7 @@
                             <td><?= htmlspecialchars($facility->city) ?></td>
                             <td><?= htmlspecialchars($facility->province) ?></td>
                             <td><?= htmlspecialchars($facility->phoneNumber) ?></td>
-                            <td><?= htmlspecialchars($facility->$webAddress) ?></td>
+                            <td><?= htmlspecialchars($facility->webAddress) ?></td>
                             <td><?= htmlspecialchars($facility->type) ?></td>
                             <td><?= htmlspecialchars($facility->capacity) ?></td>
                             <td><?= htmlspecialchars($facility->generalManagerName) ?></td>
@@ -48,23 +52,24 @@
                             <td><?= htmlspecialchars($facility->numberOfDoctors) ?></td>
                             <td><?= htmlspecialchars($facility->numberOfNurses) ?></td>
                             <td>
-                            <?php if (!$this->amFollowing($facility->id)) { ?>
-                                <button type="button" class="buttonMod"><a href="/Facility/Follow/<?= $facility->id ?>">Follow</a></button>
-                            <?php } else { ?>
-                                <button type="button" class="buttonMod"><a href="/Facility/Unfollow/<?= $facility->id ?>">Unfollow</a></button>
-                            <?php } ?>
-                            <?php if ($this->amCreator($facility->id)) { ?>
-                                <button type="button" class="buttonMod"><a href="/Facility/Edit/<?= $facility->id ?>">Edit</a></button>
-                                <button type="button" class="buttonMod"><a href="/Facility/Delete/<?= $facility->id ?>">Delete</a></button>
-                            <?php } ?>
-                        </td>
-                    </tr>
-            <?php   }
-            } ?>
-        </tbody>
-    </table>
+                                <form action="/Facility/Edit" method="post" style="display: inline;">
+                                    <input type="hidden" name="address" value="<?= htmlspecialchars($facility->address) ?>">
+                                    <input type="hidden" name="postalCode" value="<?= htmlspecialchars($facility->postalCode) ?>">
+                                    <button type="submit" class="buttonMod">Edit</button>
+                                </form>
+                                <form action="/Facility/Delete" method="post" style="display: inline;" onsubmit="return confirm('Are you sure you want to delete this facility?');">
+                                    <input type="hidden" name="address" value="<?= htmlspecialchars($facility->address) ?>">
+                                    <input type="hidden" name="postalCode" value="<?= htmlspecialchars($facility->postalCode) ?>">
+                                    <button type="submit" class="buttonMod">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </tbody>
+        </table>
+    </div>
 </div>
-</div>
-<!-- CONTENT END-->
+<!-- CONTENT END -->
 
 <?php include 'app/views/Common/footer.php'; ?>

@@ -11,7 +11,7 @@
         $vaccination = $data['vaccination']; // Adjust this line based on how data is actually passed to your view
         ?>
 
-        <form action="/Vaccination/EditAction/<?= $vaccination->id ?>" method="post" class="form-format">
+        <form action="/Vaccination/EditAction" method="post" class="form-format">
             <input type="hidden" name="action" value="editvaccination">
             <input type="text" name="SSN" value="<?= htmlspecialchars($vaccination->SSN) ?>" required>
             <input type="text" name="doseNumber" value="<?= htmlspecialchars($vaccination->doseNumber) ?>" required>

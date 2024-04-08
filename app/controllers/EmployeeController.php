@@ -13,7 +13,7 @@ class EmployeeController extends Controller
     {
         // Check if the user is signed in
         if (isset($_SESSION['user_id'])) {
-            $connection = $this->model('Connection');
+            $connection = $this->model('Employee');
 
             // Calling a method from the Connection model to load all employee details
             // This could include roles, vaccination status, etc.
@@ -26,64 +26,61 @@ class EmployeeController extends Controller
             $this->view('Home/Index');
         }
     }
-    /* TO DO: INTEGRATE save() */
     public function save()
     {
         if (!isset($_SESSION['user_id'])) {
-            // Respond with JSON if not authenticated
             echo json_encode(['success' => false, 'error' => 'Not authenticated']);
             exit;
         }
-
-        // Check if the request is POST to handle form submission
+    
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $connection = $this->model('Connection');
+            $connection = $this->model('Employee');
             $data = [
                 'SSN' => $_POST['SSN'] ?? '',
-                'firstName' => $_POST['firstName'] ?? '',
-                'lastName' => $_POST['lastName'] ?? '',
+                'medicareNumber' => $_POST['medicareNumber'] ?? '',
                 'role' => $_POST['role'] ?? '',
-                // Add other form fields as needed
-                'vaccinationType' => $_POST['vaccinationType'] ?? '',
-                'doseNumber' => $_POST['doseNumber'] ?? '',
-                'vaccinationDate' => $_POST['vaccinationDate'] ?? '',
             ];
-
+    
             try {
-                if (empty($data['SSN'])) {
-                    $connection->addEmployee($data);
+                // Check if the employee exists to decide whether to add or update
+                $exists = $connection->checkEmployeeExists($data['SSN']);
+    
+                if ($exists) {
+                    $result = $connection->updateEmployee($data['SSN'], $data);
                 } else {
-                    $connection->updateEmployee($data['SSN'], $data);
+                    $result = $connection->addEmployee($data);
                 }
-
-                // Respond with JSON on success
-                echo json_encode(['success' => true]);
+    
+                if ($result) {
+                    echo json_encode(['success' => true, 'message' => 'Employee saved successfully']);
+                } else {
+                    echo json_encode(['success' => false, 'error' => 'Failed to save the employee.']);
+                }
+                exit;
             } catch (Exception $e) {
-                // Respond with JSON on error
-                http_response_code(500); // Set appropriate HTTP status code
+                http_response_code(500); 
                 echo json_encode(['success' => false, 'error' => $e->getMessage()]);
+                exit;
             }
-            exit;
         }
-    }
+    }    
 
     public function delete($SSN)
-    {
-        if (!isset($_SESSION['user_id'])) {
-            echo json_encode(['error' => 'Not authenticated']);
-            exit;
-        }
-
-        $connection = $this->model('Connection');
-        if ($connection->deleteEmployee($SSN)) {
-            echo json_encode(['success' => 'Employee deleted successfully']);
-        } else {
-            // In case of failure, consider sending a different HTTP status code
-            http_response_code(500);
-            echo json_encode(['error' => 'Deletion failed']);
-        }
+{
+    if (!isset($_SESSION['user_id'])) {
+        echo json_encode(['success' => false, 'error' => 'Not authenticated']);
         exit;
     }
+
+    $connection = $this->model('Employee');
+    if ($connection->deleteEmployee($SSN)) {
+        echo json_encode(['success' => true, 'message' => 'Employee deleted successfully']);
+    } else {
+        http_response_code(500);
+        echo json_encode(['success' => false, 'error' => 'Deletion failed. Employee might have related records.']);
+    }
+    exit;
+}
 
 }
 
