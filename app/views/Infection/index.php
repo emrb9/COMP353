@@ -8,7 +8,7 @@
     <div class="addPlacement">
         <button class="buttonMod"><a href="/Infection/Add">Add Infection</a></button>
     </div>
-    
+
     <!-- Modified Table Format for Facilities using Employee Table Styles -->
     <div class="employee-list-container">
         <table class="employee-list-table">
@@ -24,21 +24,36 @@
                 <?php if (is_array($data)) {
                     foreach ($data as $infection) { ?>
                         <tr>
-                            <td><?= htmlspecialchars($infection->SSN) ?></td>
-                            <td><?= htmlspecialchars($infection->type) ?></td>
-                            <td><?= htmlspecialchars($infection->date) ?></td>
                             <td>
-                            <?php if ($this->amCreator($infection->id)) { ?>
-                                <button type="button" class="buttonMod"><a href="/Infection/Edit/<?= $infection->id ?>">Edit</a></button>
-                                <button type="button" class="buttonMod"><a href="/Infection/Delete/<?= $infection->id ?>">Delete</a></button>
-                            <?php } ?>
-                        </td>
-                    </tr>
-            <?php   }
-            } ?>
-        </tbody>
-    </table>
-</div>
+                                <?= htmlspecialchars($infection->SSN) ?>
+                            </td>
+                            <td>
+                                <?= htmlspecialchars($infection->type) ?>
+                            </td>
+                            <td>
+                                <?= htmlspecialchars($infection->date) ?>
+                            </td>
+                            <td>
+                                <form action="/Infection/Edit" method="post" style="display: inline;">
+                                    <input type="hidden" name="SSN" value="<?= htmlspecialchars($infection->SSN) ?>">
+                                    <input type="hidden" name="type" value="<?= htmlspecialchars($infection->type) ?>">
+                                    <input type="hidden" name="date" value="<?= htmlspecialchars($infection->date) ?>">
+                                    <button type="submit" class="buttonMod">Edit</button>
+                                </form>
+                                <form action="/Infection/Delete" method="post" style="display: inline;"
+                                    onsubmit="return confirm('Are you sure you want to delete this infection?');">
+                                    <input type="hidden" name="SSN" value="<?= htmlspecialchars($infection->SSN) ?>">
+                                    <input type="hidden" name="type" value="<?= htmlspecialchars($infection->type) ?>">
+                                    <input type="hidden" name="date" value="<?= htmlspecialchars($infection->date) ?>">
+                                    <button type="submit" class="buttonMod">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <?php }
+                } ?>
+            </tbody>
+        </table>
+    </div>
 </div>
 <!-- CONTENT END-->
 

@@ -11,7 +11,7 @@
         $infection = $data['infection']; // Adjust this line based on how data is actually passed to your view
         ?>
 
-        <form action="/Infection/EditAction/<?= $infection->id ?>" method="post" class="form-format">
+        <form action="/Infection/EditAction" method="post" class="form-format">
             <input type="hidden" name="action" value="editinfection">
             <input type="text" name="SSN" value="<?= htmlspecialchars($infection->SSN) ?>" required>
             <input type="text" name="type" value="<?= htmlspecialchars($infection->type) ?>" required>

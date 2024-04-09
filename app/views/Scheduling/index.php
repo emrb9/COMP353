@@ -10,7 +10,7 @@
         <main>
         <section class = "grid">
             
-            <a href="/Group/">
+            <a href="/Schedule/">
             <div class="schedule">
             Schedule
             </div>

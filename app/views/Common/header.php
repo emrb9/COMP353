@@ -38,7 +38,7 @@
                 <li><a href="/Scheduling/">SCHEDULING▾</a>
                     <div class="dropdown">
                         <ul>
-                            <li><a href="/Job/">Schedule</a></li>
+                            <li><a href="/Schedule/">Schedule</a></li>
                             <li><a href="/Notification/">Notification</a></li>
                         </ul>
                     </div>
