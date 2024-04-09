@@ -12,7 +12,8 @@
 
 <body>
     <header>
-        <a href="/Home/"><img class="logo" src="../../../assets/logo.png" alt="HFESTS Logo" width="100px" height="100px" style="float:left"></a>
+        <a href="/Home/"><img class="logo" src="../../../assets/logo.png" alt="HFESTS Logo" width="100px" height="100px"
+                style="float:left"></a>
         <input type="checkbox" id="nav-toggle" class="nav-toggle">
         <nav>
             <ul>
@@ -43,24 +44,40 @@
                         </ul>
                     </div>
                 </li>
-                <li> <a href="/Chat/">REPORTS</a></li>
+                <li> <a href="/Chat/">REPORTS▾</a>
+                    <div class="dropdown">
+                        <ul>
+                            <li><a href="/Query9/">Query 9</a></li>
+                            <li><a href="/Query10/">Query 10</a></li>
+                            <li><a href="/Query11/">Query 11</a></li>
+                            <li><a href="/Query12/">Query 12</a></li>
+                            <li><a href="/Query13/">Query 13</a></li>
+                            <li><a href="/Query14/">Query 14</a></li>
+                            <li><a href="/Query15/">Query 15</a></li>
+                            <li><a href="/Query16/">Query 16</a></li>
+                            <li><a href="/Query17/">Query 17</a></li>
+                            <li><a href="/Query18/">Query 18</a></li>
+                        </ul>
+                    </div>
+                </li>
                 <li> <a href="/Profile/">USER▾</a>
                     <div class="dropdown">
                         <ul>
                             <li><a href="/Setting/">Settings</a></li>
-                            <?php if (isset($_SESSION['user_id'])) echo '<li><a href="/Home/Logout">Sign Out</a></li>' ?>
-                        </ul>
-                    </div>
-                </li>
-                <?php
-                if (isset($_SESSION['user_id'])) {
-                    if ($_SESSION['u_type'] == 3) {
-                        echo '
+                            <?php if (isset($_SESSION['user_id']))
+                                echo '<li><a href="/Home/Logout">Sign Out</a></li>' ?>
+                            </ul>
+                        </div>
+                    </li>
+                    <?php
+                            if (isset($_SESSION['user_id'])) {
+                                if ($_SESSION['u_type'] == 3) {
+                                    echo '
                             <li><a href="/Admin/">ADMIN</a></li>
                             ';
-                    }
-                }
-                ?>
+                                }
+                            }
+                            ?>
             </ul>
         </nav>
         <label for="nav-toggle" class="nav-toggle-label">
