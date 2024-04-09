@@ -7,7 +7,7 @@
     <h3 class="content-header">Query 15</h3>
     </div>
 <br>
-<p>For employee: 475409157 during period 2016-04-01 - 2023-04-30</p>
+<p>Nurses who are currently working at two or more different facilities and have been infected by COVID-19 in the last two weeks.</p>
     <!-- Modified Table Format for queries9 using Employee Table Styles -->
     <div class="employee-list-container">
         <table class="employee-list-table">
