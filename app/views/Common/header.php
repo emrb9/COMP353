@@ -44,7 +44,7 @@
                         </ul>
                     </div>
                 </li>
-                <li> <a href="/Chat/">REPORTS▾</a>
+                <li> <a href="/Home/">REPORTS▾</a>
                     <div class="dropdown">
                         <ul>
                             <li><a href="/Query9/">Query 9</a></li>

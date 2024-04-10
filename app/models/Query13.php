@@ -13,9 +13,9 @@ class Query13 extends Model
               JOIN Employees E
                    ON E.SSN = (SELECT P.SSN FROM Persons P WHERE P.emailAddress = Logs.receiver)
               JOIN Persons P ON E.SSN = P.SSN
-     WHERE Logs.sender = 'CLSC Addison'
+     WHERE Logs.sender = 'Clinic George'
        AND Logs.subject = 'Assignment Cancellation'
-       AND Logs.date BETWEEN '2019-01-01' AND '2024-01-01'
+       AND Logs.date BETWEEN '2022-01-01' AND '2024-01-01'
      ORDER BY Logs.date DESC";
 
             $stmt = $this->_connection->prepare($sql);

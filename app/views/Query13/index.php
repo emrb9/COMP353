@@ -7,7 +7,7 @@
     <h3 class="content-header">Query 13</h3>
     </div>
 <br>
-<p>For facility: CLSC Addison. Email generated for cancelation of assigments during period: 2019-01-01 - 2024-01-01</p>
+<p>For facility: Clinic George. Email generated for cancelation of assigments during period: 2022-01-01 - 2024-01-01</p>
     <!-- Modified Table Format for queries9 using Employee Table Styles -->
     <div class="employee-list-container">
         <table class="employee-list-table">
